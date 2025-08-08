@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import { Search, Filter, Edit3, Trash2, Calendar } from 'lucide-react';
 import { Expense } from '../App';
 
+// Définition des propriétés attendues pour le composant ExpenseList
 interface ExpenseListProps {
-  expenses: Expense[];
-  categories: string[];
-  onEdit: (expense: Expense) => void;
-  onDelete: (id: string) => void;
+  expenses: Expense[]; // Liste des dépenses
+  categories: string[]; // Liste des catégories disponibles
+  onEdit: (expense: Expense) => void; // Fonction appelée lors de la modification d'une dépense
+  onDelete: (id: string) => void; // Fonction appelée lors de la suppression d'une dépense
 }
 
+// Composant principal pour afficher la liste des dépenses
 export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseListProps) {
+  // États locaux pour la recherche, la catégorie sélectionnée, le tri et l'ordre de tri
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
+  // Filtrage et tri des dépenses selon les critères sélectionnés
   const filteredExpenses = expenses
     .filter(expense => 
       expense.description.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -48,8 +52,10 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
       }
     });
 
+  // Calcul du montant total des dépenses filtrées
   const totalAmount = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
 
+  // Gestion de la suppression avec confirmation
   const handleDelete = (id: string) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cette dépense ?')) {
       onDelete(id);
@@ -58,13 +64,15 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
 
   return (
     <div className="space-y-6">
+      {/* Titre */}
       <div>
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Mes dépenses</h2>
       </div>
 
-      {/* Filters and Search */}
+      {/* Filtres et recherche */}
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
         <div className="flex flex-col md:flex-row gap-4">
+          {/* Champ de recherche */}
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -78,6 +86,7 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
             </div>
           </div>
 
+          {/* Sélection de la catégorie et du tri */}
           <div className="flex gap-4">
             <select
               value={selectedCategory}
@@ -109,7 +118,7 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
           </div>
         </div>
 
-        {/* Summary */}
+        {/* Résumé du nombre de dépenses et du total */}
         <div className="mt-4 pt-4 border-t border-gray-200">
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-600">
@@ -119,7 +128,7 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
         </div>
       </div>
 
-      {/* Expenses List */}
+      {/* Liste des dépenses */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         {filteredExpenses.length > 0 ? (
           <div className="divide-y divide-gray-200">
@@ -128,14 +137,17 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
+                      {/* Description de la dépense */}
                       <h3 className="text-lg font-medium text-gray-900">
                         {expense.description}
                       </h3>
+                      {/* Montant de la dépense */}
                       <span className="text-lg font-semibold text-gray-900">
                         -{expense.amount.toFixed(2)} €
                       </span>
                     </div>
                     
+                    {/* Catégorie et date de la dépense */}
                     <div className="flex items-center text-sm text-gray-500 space-x-4">
                       <span className="flex items-center">
                         <Filter className="h-4 w-4 mr-1" />
@@ -148,6 +160,7 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
                     </div>
                   </div>
 
+                  {/* Boutons d'édition et de suppression */}
                   <div className="ml-6 flex items-center space-x-2">
                     <button
                       onClick={() => onEdit(expense)}
@@ -169,6 +182,7 @@ export function ExpenseList({ expenses, categories, onEdit, onDelete }: ExpenseL
             ))}
           </div>
         ) : (
+          // Message affiché si aucune dépense n'est trouvée
           <div className="p-12 text-center">
             <div className="text-gray-400 mb-4">
               <Filter className="h-12 w-12 mx-auto" />

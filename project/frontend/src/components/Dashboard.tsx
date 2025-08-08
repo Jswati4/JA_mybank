@@ -14,16 +14,20 @@ interface DashboardProps {
   categories: string[];
 }
 
+// Composant principal du tableau de bord
 export function Dashboard({ expenses, categories }: DashboardProps) {
+  // Récupère le mois et l'année en cours
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   
+  // Filtre les dépenses du mois en cours
   const thisMonthExpenses = expenses.filter(expense => {
     const expenseDate = new Date(expense.date);
     return expenseDate.getMonth() === currentMonth && 
            expenseDate.getFullYear() === currentYear;
   });
 
+  // Filtre les dépenses du mois précédent
   const lastMonthExpenses = expenses.filter(expense => {
     const expenseDate = new Date(expense.date);
     const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
@@ -32,11 +36,15 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
            expenseDate.getFullYear() === lastMonthYear;
   });
 
+  // Calcule le total des dépenses du mois en cours
   const totalThisMonth = thisMonthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+  // Calcule le total des dépenses du mois précédent
   const totalLastMonth = lastMonthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+  // Calcule la variation mensuelle en pourcentage
   const monthlyChange = totalLastMonth > 0 ? 
     ((totalThisMonth - totalLastMonth) / totalLastMonth) * 100 : 0;
 
+  // Calcule le total des dépenses par catégorie pour le mois en cours
   const categoryTotals = categories.map(category => ({
     category,
     total: thisMonthExpenses
@@ -44,7 +52,9 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
       .reduce((sum, exp) => sum + exp.amount, 0)
   })).filter(item => item.total > 0);
 
+  // Récupère les 5 dernières dépenses (toutes périodes confondues)
   const recentExpenses = expenses
+    .slice() // éviter de trier directement l'array props
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
 
@@ -54,8 +64,9 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Tableau de bord</h2>
       </div>
 
-      {/* Stats Cards */}
+      {/* Cartes de statistiques */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Carte : Total du mois en cours */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
@@ -69,6 +80,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
             </div>
           </div>
           <div className="mt-4 flex items-center">
+            {/* Affiche la tendance (hausse/baisse) */}
             {monthlyChange >= 0 ? (
               <TrendingUp className="h-4 w-4 text-red-500 mr-1" />
             ) : (
@@ -83,6 +95,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
           </div>
         </div>
 
+        {/* Carte : Nombre de transactions du mois */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
@@ -95,6 +108,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
           </div>
         </div>
 
+        {/* Carte : Moyenne des dépenses par jour */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
@@ -109,6 +123,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
           </div>
         </div>
 
+        {/* Carte : Nombre de catégories utilisées ce mois */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
@@ -123,7 +138,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Categories Chart */}
+        {/* Graphique : Dépenses par catégorie pour le mois en cours */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Dépenses par catégorie ce mois
@@ -131,6 +146,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
           <div className="space-y-4">
             {categoryTotals.length > 0 ? (
               categoryTotals.map((item, index) => {
+                // Calcule le pourcentage de chaque catégorie
                 const percentage = (item.total / totalThisMonth) * 100;
                 const colors = [
                   'bg-blue-500',
@@ -145,6 +161,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
                 return (
                   <div key={item.category} className="flex items-center justify-between">
                     <div className="flex items-center">
+                      {/* Pastille de couleur pour la catégorie */}
                       <div className={`w-3 h-3 rounded-full ${colors[index % colors.length]} mr-3`} />
                       <span className="text-sm font-medium text-gray-700">{item.category}</span>
                     </div>
@@ -161,7 +178,7 @@ export function Dashboard({ expenses, categories }: DashboardProps) {
           </div>
         </div>
 
-        {/* Recent Expenses */}
+        {/* Liste : Dépenses récentes */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Dépenses récentes</h3>
           <div className="space-y-4">

@@ -1,0 +1,241 @@
+/* Réinitialisation des variables CSS personnalisées pour tous les éléments et pseudo-éléments */
+*,:before,:after{
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / .5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+    --tw-contain-size: ;
+    --tw-contain-layout: ;
+    --tw-contain-paint: ;
+    --tw-contain-style: 
+}
+
+/* Réinitialisation des variables CSS personnalisées pour le pseudo-élément ::backdrop */
+::backdrop{
+    /* Même contenu que ci-dessus */
+}
+
+/* Définition du box-sizing et des styles de bordure par défaut */
+*,:before,:after{
+    box-sizing:border-box;
+    border-width:0;
+    border-style:solid;
+    border-color:#e5e7eb
+}
+
+/* Définition du contenu par défaut pour les pseudo-éléments */
+:before,:after{
+    --tw-content: ""
+}
+
+/* Styles de base pour html et :host */
+html,:host{
+    line-height:1.5;
+    -webkit-text-size-adjust:100%;
+    -moz-tab-size:4;
+    -o-tab-size:4;
+    tab-size:4;
+    font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+    font-feature-settings:normal;
+    font-variation-settings:normal;
+    -webkit-tap-highlight-color:transparent
+}
+
+/* Suppression de la marge par défaut du body */
+body{
+    margin:0;
+    line-height:inherit
+}
+
+/* Style pour les lignes horizontales */
+hr{
+    height:0;
+    color:inherit;
+    border-top-width:1px
+}
+
+/* Style pour les abréviations avec attribut title */
+abbr:where([title]){
+    -webkit-text-decoration:underline dotted;
+    text-decoration:underline dotted
+}
+
+/* Suppression des styles par défaut pour les titres */
+h1,h2,h3,h4,h5,h6{
+    font-size:inherit;
+    font-weight:inherit
+}
+
+/* Héritage de la couleur et suppression de la décoration pour les liens */
+a{
+    color:inherit;
+    text-decoration:inherit
+}
+
+/* Mise en gras pour b et strong */
+b,strong{
+    font-weight:bolder
+}
+
+/* Styles pour les éléments de code */
+code,kbd,samp,pre{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+    font-feature-settings:normal;
+    font-variation-settings:normal;
+    font-size:1em
+}
+
+/* Taille réduite pour small */
+small{
+    font-size:80%
+}
+
+/* Styles pour sub et sup */
+sub,sup{
+    font-size:75%;
+    line-height:0;
+    position:relative;
+    vertical-align:baseline
+}
+sub{bottom:-.25em}
+sup{top:-.5em}
+
+/* Styles pour les tableaux */
+table{
+    text-indent:0;
+    border-color:inherit;
+    border-collapse:collapse
+}
+
+/* Styles pour les champs de formulaire */
+button,input,optgroup,select,textarea{
+    font-family:inherit;
+    font-feature-settings:inherit;
+    font-variation-settings:inherit;
+    font-size:100%;
+    font-weight:inherit;
+    line-height:inherit;
+    letter-spacing:inherit;
+    color:inherit;
+    margin:0;
+    padding:0
+}
+
+/* Suppression de la transformation de texte pour button et select */
+button,select{
+    text-transform:none
+}
+
+/* Apparence des boutons */
+button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){
+    -webkit-appearance:button;
+    background-color:transparent;
+    background-image:none
+}
+
+/* Styles d'accessibilité pour Firefox */
+:-moz-focusring{outline:auto}
+:-moz-ui-invalid{box-shadow:none}
+
+/* Alignement vertical pour progress */
+progress{vertical-align:baseline}
+
+/* Suppression des flèches pour les champs number sur Webkit */
+::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}
+
+/* Apparence des champs de recherche */
+[type=search]{
+    -webkit-appearance:textfield;
+    outline-offset:-2px
+}
+::-webkit-search-decoration{
+    -webkit-appearance:none
+}
+
+/* Apparence du bouton d'upload de fichier */
+::-webkit-file-upload-button{
+    -webkit-appearance:button;
+    font:inherit
+}
+
+/* Affichage des éléments summary */
+summary{display:list-item}
+
+/* Suppression des marges pour certains éléments */
+blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre{margin:0}
+
+/* Suppression des marges et padding pour fieldset */
+fieldset{margin:0;padding:0}
+legend{padding:0}
+
+/* Suppression des styles de liste */
+ol,ul,menu{list-style:none;margin:0;padding:0}
+
+/* Suppression du padding pour dialog */
+dialog{padding:0}
+
+/* Redimensionnement vertical pour textarea */
+textarea{resize:vertical}
+
+/* Styles pour les placeholders */
+input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}
+input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}
+
+/* Curseur pointer pour les boutons */
+button,[role=button]{cursor:pointer}
+:disabled{cursor:default}
+
+/* Affichage en bloc pour les médias */
+img,svg,video,canvas,audio,iframe,embed,object{
+    display:block;
+    vertical-align:middle
+}
+
+/* Largeur maximale pour images et vidéos */
+img,video{max-width:100%;height:auto}
+
+/* Masquer les éléments cachés */
+[hidden]:where(:not([hidden=until-found])){display:none}

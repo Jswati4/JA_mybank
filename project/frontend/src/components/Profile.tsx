@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { User, Mail, Calendar, Settings, Download, Upload } from 'lucide-react';
 import { User as UserType } from '../App';
 
+// Définition des props du composant Profile
 interface ProfileProps {
   user: UserType;
 }
 
+// Composant principal Profile
 export function Profile({ user }: ProfileProps) {
+  // État pour gérer l'onglet actif
   const [activeTab, setActiveTab] = useState('info');
 
+  // Fonction pour exporter les données utilisateur et dépenses
   const handleExportData = () => {
     const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
     const userData = {
@@ -29,6 +33,7 @@ export function Profile({ user }: ProfileProps) {
     URL.revokeObjectURL(url);
   };
 
+  // Fonction pour importer des données depuis un fichier JSON
   const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -51,6 +56,7 @@ export function Profile({ user }: ProfileProps) {
     }
   };
 
+  // Définition des onglets du profil
   const tabs = [
     { id: 'info', label: 'Informations', icon: User },
     { id: 'data', label: 'Mes données', icon: Settings },
@@ -58,16 +64,19 @@ export function Profile({ user }: ProfileProps) {
 
   return (
     <div className="space-y-6">
+      {/* Titre du profil */}
       <div>
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Mon profil</h2>
       </div>
 
-      {/* Profile Header */}
+      {/* En-tête du profil */}
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
         <div className="flex items-center space-x-6">
+          {/* Avatar utilisateur */}
           <div className="h-20 w-20 bg-blue-100 rounded-full flex items-center justify-center">
             <User className="h-10 w-10 text-blue-600" />
           </div>
+          {/* Informations utilisateur */}
           <div>
             <h3 className="text-xl font-semibold text-gray-900">{user.name}</h3>
             <p className="text-gray-600">{user.email}</p>
@@ -78,10 +87,11 @@ export function Profile({ user }: ProfileProps) {
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Onglets de navigation */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="border-b border-gray-200">
           <nav className="flex space-x-8 px-6">
+            {/* Affichage des onglets */}
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -102,10 +112,13 @@ export function Profile({ user }: ProfileProps) {
           </nav>
         </div>
 
+        {/* Contenu de l'onglet actif */}
         <div className="p-6">
+          {/* Onglet Informations */}
           {activeTab === 'info' && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Nom complet */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Nom complet
@@ -116,6 +129,7 @@ export function Profile({ user }: ProfileProps) {
                   </div>
                 </div>
 
+                {/* Adresse email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Adresse email
@@ -126,6 +140,7 @@ export function Profile({ user }: ProfileProps) {
                   </div>
                 </div>
 
+                {/* Date d'inscription */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Date d'inscription
@@ -136,6 +151,7 @@ export function Profile({ user }: ProfileProps) {
                   </div>
                 </div>
 
+                {/* Statut du compte */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Statut du compte
@@ -149,6 +165,7 @@ export function Profile({ user }: ProfileProps) {
             </div>
           )}
 
+          {/* Onglet Mes données */}
           {activeTab === 'data' && (
             <div className="space-y-6">
               <div>
@@ -158,6 +175,7 @@ export function Profile({ user }: ProfileProps) {
                 </p>
               </div>
 
+              {/* Boutons d'export et d'import */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button
                   onClick={handleExportData}
@@ -179,6 +197,7 @@ export function Profile({ user }: ProfileProps) {
                 </label>
               </div>
 
+              {/* Message d'information */}
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <h5 className="font-medium text-yellow-800 mb-2">Information importante</h5>
                 <p className="text-sm text-yellow-700">

@@ -22,6 +22,7 @@ import { Statistics } from './components/Statistics';
 import { Profile } from './components/Profile';
 import { LoginForm } from './components/LoginForm';
 
+// Définition de l'interface pour une dépense
 export interface Expense {
   id: string;
   amount: number;
@@ -31,12 +32,14 @@ export interface Expense {
   userId: string;
 }
 
+// Définition de l'interface pour un utilisateur
 export interface User {
   id: string;
   name: string;
   email: string;
 }
 
+// Liste des catégories de dépenses
 const CATEGORIES = [
   'Alimentation',
   'Transport',
@@ -49,13 +52,18 @@ const CATEGORIES = [
 ];
 
 function App() {
+  // État de l'utilisateur connecté
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  // Onglet actif dans la navigation
   const [activeTab, setActiveTab] = useState('dashboard');
+  // Liste des dépenses
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  // Affichage du formulaire de dépense
   const [showExpenseForm, setShowExpenseForm] = useState(false);
+  // Dépense en cours d'édition
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
 
-  // Simulate login
+  // Simulation de la connexion utilisateur
   const handleLogin = (email: string, password: string) => {
     const user: User = {
       id: '1',
@@ -66,7 +74,7 @@ function App() {
     localStorage.setItem('currentUser', JSON.stringify(user));
   };
 
-  // Load user and expenses from localStorage
+  // Chargement de l'utilisateur et des dépenses depuis le localStorage au montage
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser');
     const savedExpenses = localStorage.getItem('expenses');
@@ -80,19 +88,21 @@ function App() {
     }
   }, []);
 
-  // Save expenses to localStorage
+  // Sauvegarde des dépenses dans le localStorage à chaque modification
   useEffect(() => {
     if (expenses.length > 0) {
       localStorage.setItem('expenses', JSON.stringify(expenses));
     }
   }, [expenses]);
 
+  // Déconnexion de l'utilisateur
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('currentUser');
     setActiveTab('dashboard');
   };
 
+  // Ajout d'une nouvelle dépense
   const addExpense = (expenseData: Omit<Expense, 'id' | 'userId'>) => {
     const newExpense: Expense = {
       ...expenseData,
@@ -103,6 +113,7 @@ function App() {
     setShowExpenseForm(false);
   };
 
+  // Mise à jour d'une dépense existante
   const updateExpense = (expenseData: Omit<Expense, 'id' | 'userId'>) => {
     if (editingExpense) {
       setExpenses(prev => prev.map(exp => 
@@ -114,21 +125,26 @@ function App() {
     }
   };
 
+  // Suppression d'une dépense
   const deleteExpense = (id: string) => {
     setExpenses(prev => prev.filter(exp => exp.id !== id));
   };
 
+  // Démarrer l'édition d'une dépense
   const startEditing = (expense: Expense) => {
     setEditingExpense(expense);
     setShowExpenseForm(true);
   };
 
+  // Si l'utilisateur n'est pas connecté, afficher le formulaire de connexion
   if (!currentUser) {
     return <LoginForm onLogin={handleLogin} />;
   }
 
+  // Filtrer les dépenses de l'utilisateur courant
   const userExpenses = expenses.filter(exp => exp.userId === currentUser.id);
 
+  // Définition de la navigation latérale
   const navigation = [
     { id: 'dashboard', label: 'Tableau de bord', icon: Home },
     { id: 'expenses', label: 'Dépenses', icon: CreditCard },
@@ -138,7 +154,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* En-tête */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -165,7 +181,7 @@ function App() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Navigation */}
+          {/* Barre latérale de navigation */}
           <div className="lg:w-64">
             <nav className="bg-white rounded-lg shadow-sm p-4">
               <div className="space-y-2">
@@ -188,7 +204,7 @@ function App() {
                 })}
               </div>
 
-              {/* Quick Actions */}
+              {/* Actions rapides */}
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <h3 className="text-sm font-medium text-gray-900 mb-4">Actions rapides</h3>
                 <button
@@ -205,7 +221,7 @@ function App() {
             </nav>
           </div>
 
-          {/* Main Content */}
+          {/* Contenu principal */}
           <div className="flex-1">
             {activeTab === 'dashboard' && (
               <Dashboard expenses={userExpenses} categories={CATEGORIES} />
@@ -231,7 +247,7 @@ function App() {
         </div>
       </div>
 
-      {/* Expense Form Modal */}
+      {/* Modal du formulaire de dépense */}
       {showExpenseForm && (
         <ExpenseForm
           expense={editingExpense}

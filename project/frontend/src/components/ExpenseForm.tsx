@@ -2,19 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { X, Save } from 'lucide-react';
 import { Expense } from '../App';
 
+// Props du composant ExpenseForm
 interface ExpenseFormProps {
-  expense?: Expense | null;
-  categories: string[];
-  onSubmit: (expense: Omit<Expense, 'id' | 'userId'>) => void;
-  onCancel: () => void;
+  expense?: Expense | null; // Dépense à modifier (optionnelle)
+  categories: string[]; // Liste des catégories disponibles
+  onSubmit: (expense: Omit<Expense, 'id' | 'userId'>) => void; // Fonction appelée lors de la soumission
+  onCancel: () => void; // Fonction appelée lors de l'annulation
 }
 
+// Composant principal du formulaire de dépense
 export function ExpenseForm({ expense, categories, onSubmit, onCancel }: ExpenseFormProps) {
+  // États locaux pour chaque champ du formulaire
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
 
+  // Remplit les champs si une dépense est fournie, sinon initialise les valeurs par défaut
   useEffect(() => {
     if (expense) {
       setAmount(expense.amount.toString());
@@ -29,6 +33,7 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
     }
   }, [expense, categories]);
 
+  // Gestion de la soumission du formulaire
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
@@ -40,8 +45,11 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
   };
 
   return (
+    // Overlay sombre pour le fond
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      {/* Boîte du formulaire */}
       <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
+        {/* En-tête avec titre et bouton de fermeture */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-gray-900">
             {expense ? 'Modifier la dépense' : 'Nouvelle dépense'}
@@ -54,7 +62,9 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
           </button>
         </div>
 
+        {/* Formulaire principal */}
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Champ Montant */}
           <div>
             <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
               Montant (€)
@@ -71,6 +81,7 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
             />
           </div>
 
+          {/* Champ Description */}
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
               Description
@@ -86,6 +97,7 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
             />
           </div>
 
+          {/* Champ Catégorie */}
           <div>
             <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
               Catégorie
@@ -103,6 +115,7 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
             </select>
           </div>
 
+          {/* Champ Date */}
           <div>
             <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
               Date
@@ -117,6 +130,7 @@ export function ExpenseForm({ expense, categories, onSubmit, onCancel }: Expense
             />
           </div>
 
+          {/* Boutons d'action */}
           <div className="flex space-x-3 pt-4">
             <button
               type="submit"
