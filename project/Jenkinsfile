@@ -1,37 +1,46 @@
 pipeline {
     agent any
+    // Utilise n'importe quel agent disponible pour exécuter ce pipeline
 
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        // Définit une variable d'environnement pour le fichier docker-compose utilisé
     }
 
     stages {
         stage('Checkout') {
             steps {
+                // Récupère le code source depuis la branche 'main' du dépôt GitHub
                 git branch: 'main', url: 'https://github.com/Jswati4/JA_mybank.git'
             }
         }
 
         stage('Build Images') {
             steps {
+                // Construit les images Docker définies dans le fichier docker-compose.yml
                 sh "docker compose -f ${DOCKER_COMPOSE_FILE} build"
             }
         }
 
         stage('Run Tests Backend') {
             steps {
+                // Exécute les tests backend PHP via PHPUnit dans un conteneur Docker
+                // En cas d'erreur (pas de tests), affiche un message sans arrêter le pipeline
                 sh "docker compose -f ${DOCKER_COMPOSE_FILE} run --rm backend php bin/phpunit || echo 'Pas de tests backend'"
             }
         }
 
         stage('Run Tests Frontend') {
             steps {
+                // Exécute les tests frontend (probablement avec npm) dans un conteneur Docker
+                // En cas d'erreur (pas de tests), affiche un message sans arrêter le pipeline
                 sh "docker compose -f ${DOCKER_COMPOSE_FILE} run --rm frontend npm test || echo 'Pas de tests frontend'"
             }
         }
 
         stage('Deploy') {
             steps {
+                // Démarre les services Docker en mode détaché (en arrière-plan)
                 sh "docker compose -f ${DOCKER_COMPOSE_FILE} up -d"
             }
         }
@@ -39,7 +48,9 @@ pipeline {
 
     post {
         always {
+            // Cette partie s'exécute quoi qu'il arrive, succès ou échec
             echo 'Pipeline terminé'
+            // Affiche la liste des conteneurs Docker actifs définis dans le fichier docker-compose.yml
             sh "docker compose -f ${DOCKER_COMPOSE_FILE} ps"
         }
     }

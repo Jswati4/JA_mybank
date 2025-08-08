@@ -10,7 +10,6 @@ Bien sûr, je peux t’aider à simplifier ce texte technique en mots plus facil
 
 Cette documentation explique comment on organise le travail pour que le code soit toujours bon, testé et automatiquement mis en ligne. Ça s’appelle DevOps.
 
-## Outils pour garder un code propre
 
 ### 1. ESLint - Vérifie le code pour éviter les erreurs
 

@@ -1,8 +1,14 @@
-{
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": true,
-  "printWidth": 80,
-  "tabWidth": 2,
-  "useTabs": false
-}
+module.exports = {
+  // Ajouter un point-virgule à la fin de chaque ligne
+  semi: true,
+  // Ajouter une virgule finale pour les objets et tableaux (style ES5)
+  trailingComma: "es5",
+  // Utiliser des guillemets simples au lieu des doubles
+  singleQuote: true,
+  // Largeur maximale d'une ligne avant de passer à la ligne suivante
+  printWidth: 80,
+  // Nombre d'espaces par indentation
+  tabWidth: 2,
+  // Utiliser des espaces au lieu des tabulations
+  useTabs: false,
+};

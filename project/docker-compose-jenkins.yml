@@ -1,14 +1,14 @@
 services:
   jenkins:
-    image: jenkins/jenkins:lts
-    user: root
+    image: jenkins/jenkins:lts   # Utilise l'image officielle Jenkins en version LTS (Long Term Support)
+    user: root                   # Exécute Jenkins en tant qu'utilisateur root à l'intérieur du conteneur
     ports:
-      - "5173:8080"  # Jenkins accessible sur localhost:5173
-      - "50000:50000"
+      - "5173:8080"              # Redirige le port 8080 du conteneur vers le port 5173 de la machine hôte (accès Jenkins via localhost:5173)
+      - "50000:50000"            # Port pour la communication des agents Jenkins (slave nodes)
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+      - jenkins_home:/var/jenkins_home         # Persistance des données Jenkins dans un volume Docker nommé "jenkins_home"
+      - /var/run/docker.sock:/var/run/docker.sock  # Permet au conteneur Jenkins d’utiliser le démon Docker de l’hôte (exécuter des commandes Docker)
+    restart: unless-stopped       # Redémarre automatiquement le conteneur sauf si il est explicitement arrêté
 
 volumes:
-  jenkins_home:
+  jenkins_home:                  # Déclaration du volume Docker nommé "jenkins_home" pour stocker les données Jenkins de façon persistante
