@@ -130,7 +130,7 @@ Notre pipeline d'intégration continue comprend :
 
 ## 📝 Documentation
 
-- [Documentation de déploiement](./DEPLOYMENT.md)
+- [Documentation de déploiement](./DEPLOYMENT.md) : 'https://app.netlify.com/teams/jswati4/projects'
 - [Documentation DevOps](./DEVOPS.md)
 - [Guide de contribution](./CONTRIBUTING.md)
 
