@@ -1,25 +1,22 @@
-# MyBank - Application de Gestion des Dépenses
+## Présentation
+MyBank est une application web moderne conçue pour gérer facilement vos dépenses personnelles. Développée avec React, TypeScript et Tailwind CSS, elle offre une expérience utilisateur fluide pour suivre, catégoriser et analyser vos finances.
 
-[![CI/CD Pipeline](https://github.com/username/mybank/workflows/MyBank%20CI/CD%20Pipeline/badge.svg)](https://github.com/username/mybank/actions)
-[![codecov](https://codecov.io/gh/username/mybank/branch/main/graph/badge.svg)](https://codecov.io/gh/username/mybank)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mybank&metric=alert_status)](https://sonarcloud.io/dashboard?id=mybank)
-
-## 📱 Description
-
-MyBank est une application web moderne de gestion des dépenses personnelles développée avec React, TypeScript et Tailwind CSS. Elle permet aux utilisateurs de suivre, catégoriser et analyser leurs dépenses de manière intuitive et efficace.
-
-## ✨ Fonctionnalités
-
-- **Authentification utilisateur** - Système de connexion sécurisé
-- **Gestion des dépenses** - Ajout, modification et suppression de dépenses
-- **Catégorisation** - Classification automatique par catégories
-- **Tableau de bord** - Vue d'ensemble avec statistiques en temps réel
-- **Recherche et filtres** - Recherche avancée par date, montant et catégorie
-- **Statistiques** - Graphiques et analyses des habitudes de dépenses
-- **Export/Import** - Sauvegarde et restauration des données
-- **Design responsive** - Interface adaptée mobile, tablette et desktop
+## ✨ Fonctionnalités principales
+Connexion utilisateur simple et sécurisée.
+Ajout, modification et suppression des dépenses.
+Catégories personnalisables pour mieux organiser.
+Tableau de bord avec statistiques en temps réel.
+Recherche et filtres avancés par date, montant et catégorie.
+Graphiques pour analyser les habitudes de dépense.
+Export et import faciles des données.
+Interface responsive pour tous les écrans (mobile, tablette, desktop).
 
 ## 🚀 Technologies utilisées
+Le frontend est construit avec React 18, TypeScript, Tailwind CSS, Lucide React pour les icônes, et Vite comme bundler rapide.
+
+Le backend est prévu avec Node.js, Express.js, MongoDB et JWT pour l’authentification, ou Firebase en alternative serverless. Pour l’instant, les données sont stockées en local via localStorage.
+
+La qualité du code est assurée par ESLint, Prettier, Vitest (tests unitaires), Playwright (tests end-to-end), GitHub Actions (CI) et Lighthouse CI (audit performance).
 
 ### Frontend
 - **React 18** - Bibliothèque JavaScript pour l'interface utilisateur
@@ -37,20 +34,9 @@ MyBank est une application web moderne de gestion des dépenses personnelles dé
 
 ## 🏗️ Architecture
 
-```
-src/
-├── components/          # Composants React réutilisables
-│   ├── Dashboard.tsx   # Tableau de bord principal
-│   ├── ExpenseForm.tsx # Formulaire de dépense
-│   ├── ExpenseList.tsx # Liste des dépenses
-│   ├── LoginForm.tsx   # Formulaire de connexion
-│   ├── Profile.tsx     # Profil utilisateur
-│   ├── Statistics.tsx  # Statistiques et graphiques
-│   └── __tests__/      # Tests unitaires
-├── App.tsx             # Composant racine
-├── main.tsx            # Point d'entrée
-└── index.css           # Styles globaux
-```
+Le dossier src/ contient les composants React réutilisables (Dashboard, ExpenseForm, ExpenseList, etc.) ainsi que leurs tests.
+App.tsx est le composant principal, main.tsx le point d’entrée, et index.css les styles globaux
+
 
 ## 📦 Installation
 
@@ -78,22 +64,9 @@ npm run dev
 
 L'application sera accessible sur `http://localhost:5173`
 
-## 🧪 Tests
-
-### Tests unitaires
-```bash
-npm run test           # Tests en mode watch
-npm run test:run       # Tests en une fois
-npm run test:coverage  # Tests avec couverture de code
 ```
 
-### Tests end-to-end
-```bash
-npm run test:e2e       # Tests E2E
-npm run test:e2e:ui    # Tests E2E avec interface
-```
-
-### Qualité du code
+## Qualité du code
 ```bash
 npm run lint           # Vérification ESLint
 npm run type-check     # Vérification TypeScript
