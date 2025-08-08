@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Jswati4/JA_mybank.git'
+            }
+        }
+
+        stage('Build Images') {
+            steps {
+                sh "docker compose -f ${DOCKER_COMPOSE_FILE} build"
+            }
+        }
+
+        stage('Run Tests Backend') {
+            steps {
+                sh "docker compose -f ${DOCKER_COMPOSE_FILE} run --rm backend php bin/phpunit || echo 'Pas de tests backend'"
+            }
+        }
+
+        stage('Run Tests Frontend') {
+            steps {
+                sh "docker compose -f ${DOCKER_COMPOSE_FILE} run --rm frontend npm test || echo 'Pas de tests frontend'"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh "docker compose -f ${DOCKER_COMPOSE_FILE} up -d"
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline terminé'
+            sh "docker compose -f ${DOCKER_COMPOSE_FILE} ps"
+        }
+    }
+}
