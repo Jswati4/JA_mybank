@@ -3,7 +3,7 @@ services:
     image: jenkins/jenkins:lts
     user: root
     ports:
-      - "9090:8080"  # Jenkins accessible sur localhost:8081
+      - "5173:8080"  # Jenkins accessible sur localhost:5173
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home

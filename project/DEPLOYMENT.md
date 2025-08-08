@@ -1,30 +1,33 @@
-# MyBank - Documentation de Déploiement
+## Déploiement de l’application MyBank
+MyBank est une application web de gestion des dépenses personnelles développée avec React, TypeScript et Tailwind CSS. Voici comment déployer facilement l’application.
 
-**MyBank** est une application web de gestion des dépenses personnelles développée avec React, TypeScript et Tailwind CSS. L'application permet aux utilisateurs de suivre, catégoriser et analyser leurs dépenses de manière intuitive.
+# Préparer la version finale
+Construire le projet avec la commande :
+'npm run build'
+Cette commande génère un dossier dist/ contenant les fichiers prêts à être publiés.
 
-## Comment déployer l’application MyBank
-Pour mettre en ligne l’application MyBank, on suit ces étapes simples :
+# Se connecter au service de déploiement
+Nous utilisons Netlify pour héberger l’application. Assurez-vous d’avoir un compte Netlify avec un token d’accès et l’ID du site configurés.
 
-Préparer la version finale
-On construit le projet avec la commande :
-
-bash
-Copier
-Modifier
-npm run build
-Cela crée un dossier dist/ avec les fichiers prêts à être publiés.
-
-Se connecter au service de déploiement
-Ici, on utilise Netlify pour héberger l’application. Il faut avoir un compte et les accès (token et site ID).
-
-Déployer la version finale
-Avec la commande Netlify, on envoie les fichiers dist/ sur le serveur :
-
-bash
-Copier
-Modifier
+# Déployer la version finale
+Déployer les fichiers du dossier dist/ sur Netlify avec la commande :
 netlify deploy --prod --dir=dist
-Cette commande publie l’application en production.
+Cette commande publie votre application en production.
 
-Automatisation avec GitHub Actions
-Quand on pousse du code sur la branche principale (main), le pipeline CI/CD lance automatiquement toutes les vérifications, la construction et le déploiement sur Netlify
+# Automatisation via GitHub Actions
+```markdown
+Le déploiement est automatisé grâce à un pipeline CI/CD configuré dans GitHub Actions.  
+À chaque push sur la branche principale (`main`), ce pipeline :
+- Exécute les vérifications de qualité du code (lint, tests, build)
+- Déploie automatiquement la nouvelle version sur Netlify si toutes les vérifications passent
+
+<!--
+Explications :
+- Cette section décrit le fonctionnement de l’automatisation du déploiement via GitHub Actions.
+- Elle précise que le pipeline s’exécute à chaque push sur la branche principale.
+- Les étapes du pipeline sont listées pour plus de clarté.
+-->
+```
+Déploie automatiquement la nouvelle version sur Netlify :
+https://app.netlify.com/teams/jswati4/projects
+
