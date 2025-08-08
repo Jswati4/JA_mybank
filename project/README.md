@@ -62,7 +62,7 @@ src/
 
 1. **Cloner le repository**
 ```bash
-git clone https://github.com/username/mybank.git
+git clone https://github.com/Jswati4/JA_mybank.git
 cd mybank
 ```
 
