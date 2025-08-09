@@ -111,7 +111,6 @@ git clone https://github.com/Jswati4/JA_mybank.git
 cd JA_mybank
 npm install
 npm run dev
-```
 
 # Tests
 
